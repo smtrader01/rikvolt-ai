@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel AI - Live Dashboard</title>
-    <!-- Tailwind CSS (ডিজাইন সুন্দর ও মোবাইল ফ্রেন্ডলি করার জন্য) -->
+    <!-- Tailwind CSS -->
     <script src="https://jsdelivr.net"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         body { background: linear-gradient(135deg, #090d16 0%, #0f172a 100%); }
+        /* Toggle Switch Styling */
+        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ff9100; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #00e676; }
+        input:checked + .slider:before { transform: translateX(22px); }
     </style>
 </head>
 <body class="text-white min-h-screen font-sans p-4 md:p-8">
@@ -20,6 +29,18 @@
             </h1>
             <p class="text-xs text-slate-400 mt-1">স্বাগতম, Subrata Das | রোল: অ্যাডমিন/মালিক</p>
         </div>
+        
+        <!-- ডেমো বনাম লাইভ মোড টগল সুইচ (নতুন যুক্ত করা হয়েছে) -->
+        <div class="mt-4 md:mt-0 flex items-center gap-3 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-xl shadow-lg">
+            <span class="text-xs font-bold text-amber-500 flex items-center gap-1.5" id="mode-text">
+                <i class="fa-solid fa-flask"></i> ডেমো মোড (Test)
+            </span>
+            <label class="switch">
+                <input type="checkbox" id="modeToggle" onchange="toggleTradingMode()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
         <!-- 🚨 স্পেশাল প্যানিক বাটন -->
         <button onclick="activatePanicButton()" class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-red-600/30 transition-all text-sm">
             🚨 EMERGENCY PANIC BUTTON
@@ -27,11 +48,11 @@
     </div>
 
     <!-- মেইন গ্রিড লেআউট -->
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         
         <!-- ================= বাম কলাম: কাস্টম ফান্ড ও ব্রোকার কন্ট্রোল ================= -->
         <div class="space-y-6 md:col-span-1">
-            <!-- ফান্ড ইনপুট কার্ড -->
+            <!-- ফান্ড ইনপুটカード -->
             <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
                 <h2 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-4">💰 ট্রেডিং ফান্ড সেটআপ</h2>
                 <label class="block text-xs text-slate-400 mb-2">আপনার ইচ্ছামতো ট্রেডিং অ্যামাউন্ট দিন (১০০ টাকা থেকে যেকোনো পরিমাণ):</label>
@@ -104,33 +125,22 @@
 
     </div>
 
-    <!-- ইন্টারঅ্যাক্টিভ জাভাস্ক্রিপ্ট লজিক -->
-    <script>
-        function updateFund() {
-            const amount = document.getElementById('trading-amount').value;
-            if(amount && amount > 0) {
-                document.getElementById('current-fund').innerText = '₹' + parseFloat(amount).toLocaleString('bn-BD');
-                alert('✅ আপনার নতুন ট্রেডিং ক্যাপিটাল সফলভাবে সেট করা হয়েছে!');
-            } else {
-                alert('⚠️ অনুগ্রহ করে একটি সঠিক অ্যামাউন্ট ইনপুট দিন।');
-            }
-        }
-
-        function handleBrokerChange() {
-            const broker = document.getElementById('broker-select').value;
-            document.getElementById('log-broker-status').innerText = `[18:23:01] 📡 রুট পরিবর্তন করা হয়েছে: ${broker} এপিআই সার্ভার ট্র্যাকিং অন।`;
-        }
-
-        function connectBrokerAPI() {
-            const broker = document.getElementById('broker-select').value;
-            alert(`✅ [UNIVERSAL SUCCESS]: আপনার ${broker} অ্যাকাউন্টটি সফলভাবে Project Angel AI-এর সাথে লিঙ্ক করা হয়েছে!`);
-        }
-
-        function activatePanicButton() {
-            if(confirm('🚨 আপনি কি নিশ্চিত যে আপনি এই মুহূর্তে সমস্ত রানিং ট্রেড বন্ধ করে ফান্ড ক্যাশ লক করতে চান?')) {
-                alert('🛡️ SENTINEL SHIELD ACTIVATED! Angel AI ১ মিলি-সেকেন্ডের মধ্যে সমস্ত লাইভ ট্রেড ক্লোজ করে আপনার ব্রোকার ফান্ড সম্পূর্ণ ক্যাশ লক করে দিয়েছে।');
-            }
-        }
-    </script>
-</body>
-</html>
+    <!-- ================= Angel AI ফ্লটিং চ্যাট উইজেট (নতুন যুক্ত করা হয়েছে) ================= -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- চ্যাট বাবল বাটন -->
+        <div onclick="toggleChatWindow()" class="w-14 height w-14 h-14 bg-amber-400 rounded-full flex justify-center items-center cursor-pointer shadow-xl shadow-amber-400/20 hover:scale-110 active:scale-95 transition-all">
+            <i class="fa-solid fa-robot text-slate-950 text-xl"></i>
+        </div>
+        <!-- চ্যাট উইন্ডো -->
+        <div id="angelChatWindow" class="absolute bottom-16 right-0 w-80 md:w-96 h-[450px] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl hidden flex-col overflow-hidden">
+            <!-- চ্যাট হেডার -->
+            <div class="bg-slate-800 p-4 flex items-center gap-3 border-b border-slate-700">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                <div>
+                    <h3 class="text-sm font-bold text-amber-400">Angel AI Engine</h3>
+                    <p class="text-[10px] text-slate-400">Your Secure Coding & Trading Partner</p>
+                </div>
+            </div>
+            <!-- মেসেজ বক্স -->
+            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs flex flex-col">
+                <div class="bg-slate-800 text-slate-200 p-3 rounded-xl rounded-bl-none max-w-[85%] self-start leading-relaxed">
