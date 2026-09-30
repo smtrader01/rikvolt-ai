@@ -3,144 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angel AI - Live Dashboard</title>
-    <!-- Tailwind CSS -->
+    <title>Project Angel AI - Elite Hybrid Dashboard</title>
+    <!-- Tailwind CSS Engine -->
     <script src="https://jsdelivr.net"></script>
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome Premium Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
-        body { background: linear-gradient(135deg, #090d16 0%, #0f172a 100%); }
-        /* Toggle Switch Styling */
-        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        body { 
+            background: radial-gradient(circle at top right, #0d1527 0%, #070a12 100%);
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+        }
+        /* Custom Modern Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #070a12; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        
+        /* Premium Custom Toggle Switch */
+        .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ff9100; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #00e676; }
-        input:checked + .slider:before { transform: translateX(22px); }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #ff9100; transition: .4s; border-radius: 34px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        input:checked + .slider { background: #00e676; box-shadow: 0 0 10px rgba(0,230,118,0.3); }
+        input:checked + .slider:before { transform: translateX(24px); }
     </style>
 </head>
-<body class="text-white min-h-screen font-sans p-4 md:p-8">
+<body class="text-slate-100 min-h-screen p-3 sm:p-6 md:p-8 flex flex-col justify-between">
 
-    <!-- হেডার সেকশন -->
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-8 border-b border-slate-800 pb-4">
-        <div>
-            <h1 class="text-2xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-                👑 Project Angel AI Control
-            </h1>
-            <p class="text-xs text-slate-400 mt-1">স্বাগতম, Subrata Das | রোল: অ্যাডমিন/মালিক</p>
+    <!-- Top Elite Navigation Header -->
+    <div class="max-w-7xl mx-auto w-full flex flex-col lg:flex-row justify-between items-center bg-slate-900/60 backdrop-blur-md border border-slate-800/80 p-4 md:p-6 rounded-2xl shadow-2xl mb-8 gap-4">
+        <div class="flex items-center gap-4 text-center lg:text-left">
+            <div class="p-3 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl text-slate-950 shadow-lg shadow-amber-500/20">
+                <i class="fa-solid fa-brain-circuit text-xl md:text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-xl md:text-2xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-amber-400 bg-clip-text text-transparent tracking-wide">
+                    👑 Project Angel AI Multi-Agent
+                </h1>
+                <p class="text-[11px] text-slate-400 mt-0.5 font-medium flex items-center justify-center lg:justify-start gap-1">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    স্বাগতম, Subrata Das | রোল: প্রধান অ্যাডমিন ও মালিক
+                </p>
+            </div>
         </div>
         
-        <!-- ডেমো বনাম লাইভ মোড টগল সুইচ (নতুন যুক্ত করা হয়েছে) -->
-        <div class="mt-4 md:mt-0 flex items-center gap-3 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-xl shadow-lg">
-            <span class="text-xs font-bold text-amber-500 flex items-center gap-1.5" id="mode-text">
-                <i class="fa-solid fa-flask"></i> ডেমো মোড (Test)
-            </span>
-            <label class="switch">
-                <input type="checkbox" id="modeToggle" onchange="toggleTradingMode()">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <!-- 🚨 স্পেশাল প্যানিক বাটন -->
-        <button onclick="activatePanicButton()" class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-red-600/30 transition-all text-sm">
-            🚨 EMERGENCY PANIC BUTTON
-        </button>
-    </div>
-
-    <!-- মেইন গ্রিড লেআউট -->
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-        
-        <!-- ================= বাম কলাম: কাস্টম ফান্ড ও ব্রোকার কন্ট্রোল ================= -->
-        <div class="space-y-6 md:col-span-1">
-            <!-- ফান্ড ইনপুটカード -->
-            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                <h2 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-4">💰 ট্রেডিং ফান্ড সেটআপ</h2>
-                <label class="block text-xs text-slate-400 mb-2">আপনার ইচ্ছামতো ট্রেডিং অ্যামাউন্ট দিন (১০০ টাকা থেকে যেকোনো পরিমাণ):</label>
-                <div class="flex gap-2">
-                    <input id="trading-amount" type="number" placeholder="যেমন: 5000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500 text-sm font-semibold">
-                    <button onclick="updateFund()" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold px-4 rounded-xl text-sm transition-all">সেট</button>
-                </div>
-                <p class="text-[11px] text-emerald-400 mt-2 font-medium">🎯 বর্তমান অ্যাক্টিভ ফান্ড: <span id="current-fund">₹0.00</span></p>
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto justify-end">
+            <!-- World-First Neural Shield Toggle Status -->
+            <div class="flex items-center gap-3 bg-slate-950/80 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-inner w-full sm:w-auto justify-between">
+                <span class="text-xs font-bold text-amber-500 flex items-center gap-2" id="mode-text">
+                    <i class="fa-solid fa-flask-vial"></i> ডেমো মোড (Sandbox)
+                </span>
+                <label class="switch">
+                    <input type="checkbox" id="modeToggle" onchange="toggleTradingMode()">
+                    <span class="slider"></span>
+                </label>
             </div>
 
-            <!-- 🔌 নতুন ইউনিভার্সাল ব্রোকার সিলেকশন কার্ড -->
-            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                <h2 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4">🔌 আপনার ব্রোকার যুক্ত করুন</h2>
+            <!-- 🚨 Emergency Panic Override Button -->
+            <button onclick="activatePanicButton()" class="w-full sm:w-auto bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 active:scale-95 text-white font-extrabold px-6 py-3 rounded-xl shadow-lg shadow-red-600/20 transition-all text-xs tracking-wider uppercase flex items-center justify-center gap-2 border border-red-500/30 cursor-pointer">
+                <i class="fa-solid fa-triangle-exclamation animate-bounce"></i> EMERGENCY PANIC BUTTON
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Grid Dashboard Architecture (Responsive Layout Fix) -->
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-6 items-start flex-1 mb-24">
+        
+        <!-- LEFT WING: Capital Controls & Inter-Exchange Bridges -->
+        <div class="space-y-6 lg:col-span-1 w-full">
+            <!-- Fund Setup -->
+            <div class="bg-slate-900/40 backdrop-blur-sm border border-slate-800/80 p-5 md:p-6 rounded-2xl shadow-xl hover:border-cyan-500/40 transition-all">
+                <h2 class="text-xs font-black text-cyan-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-piggy-bank"></i> 💰 ট্রেডিং ফান্ড সেটআপ
+                </h2>
+                <label class="block text-[11px] text-slate-400 mb-3 leading-relaxed">প্লাস কাস্টমার এবং আপনার জন্য আলাদা আইসোলেটেড ফান্ড ব্যালেন্স সেট করুন:</label>
+                <div class="flex gap-2">
+                    <input id="trading-amount" type="number" placeholder="যেমন: 5000" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500 text-xs font-semibold shadow-inner">
+                    <button onclick="updateFund()" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-black px-5 rounded-xl text-xs transition-all tracking-wide cursor-pointer shadow-md">সেট</button>
+                </div>
+                <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/60 mt-3 flex justify-between items-center">
+                    <span class="text-[11px] text-slate-400 font-medium">🎯 বর্তমান অ্যাক্টিভ ক্যাপিটাল:</span>
+                    <span id="current-fund" class="text-xs font-black text-emerald-400 tracking-wider">₹0.00</span>
+                </div>
+            </div>
+
+            <!-- Universal Broker Connector -->
+            <div class="bg-slate-900/40 backdrop-blur-sm border border-slate-800/80 p-5 md:p-6 rounded-2xl shadow-xl hover:border-indigo-500/40 transition-all">
+                <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-nodes"></i> 🔌 ব্রোকার লাইভ এপিআই গেটওয়ে
+                </h2>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs text-slate-400 mb-2">ব্রোকার বা এক্সচেঞ্জ সিলেক্ট করুন:</label>
-                        <select id="broker-select" onchange="handleBrokerChange()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-indigo-500 font-semibold cursor-pointer">
+                        <label class="block text-[11px] text-slate-400 mb-2">এক্সচেঞ্জ সিলেক্ট করুন:</label>
+                        <select id="broker-select" onchange="handleBrokerChange()" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-white text-xs focus:outline-none focus:border-indigo-500 font-bold cursor-pointer">
                             <option value="ZERODHA">🇮🇳 Zerodha (Kite)</option>
                             <option value="ANGEL_ONE">🇮🇳 Angel One</option>
-                            <option value="UPSTOX" selected>🇮🇳 Upstox</option>
-                            <option value="BINANCE">🪙 Binance (Crypto)</option>
-                            <option value="METATRADER_5">💱 MetaTrader 5 (Forex)</option>
+                            <option value="UPSTOX" selected>🇮🇳 Upstox API v2</option>
+                            <option value="BINANCE">🪙 Binance Spot/Futures</option>
+                            <option value="METATRADER_5">💱 MetaTrader 5 (Forex Engine)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">API Key / Access Token:</label>
-                        <input type="password" placeholder="••••••••••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500 text-xs">
+                        <label class="block text-[11px] text-slate-400 mb-1.5">কাস্টমার API / Access Token Key:</label>
+                        <input type="password" placeholder="••••••••••••••••••••••••" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 text-xs shadow-inner">
                     </div>
-                    <button onclick="connectBrokerAPI()" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold p-2.5 rounded-xl text-xs transition-all shadow-md">
-                        লিঙ্ক করুন 🔗
+                    <button onclick="connectBrokerAPI()" class="w-full bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold p-3 rounded-xl text-xs transition-all shadow-lg tracking-wider uppercase cursor-pointer border border-indigo-400/20">
+                        লিঙ্ক করুন ও ভল্ট সুরক্ষিত করুন 🔐
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- ================= ডান কলাম: লাইভ প্রফিট ও লগ ================= -->
-        <div class="space-y-6 md:col-span-2">
-            <!-- লাইভ আর্নিং স্ট্যাটাস কার্ড -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                    <p class="text-xs text-slate-400 font-medium">📈 আপনার লাইভ নিট প্রফিট</p>
-                    <p class="text-3xl font-black text-emerald-400 mt-2">₹১,৪৫০.৫০</p>
-                    <p class="text-[10px] text-slate-500 mt-1">সব ট্রেড ক্লোজড (জিরো লস সেফটি মোড)</p>
+        <!-- RIGHT WING: Metrics Display & Quantum Log Engine -->
+        <div class="space-y-6 lg:col-span-2 w-full">
+            <!-- Profit Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-gradient-to-br from-slate-900/60 to-slate-950/80 border border-slate-800/80 p-5 md:p-6 rounded-2xl shadow-xl border-l-4 border-l-emerald-500">
+                    <p class="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-emerald-400"></i> আপনার লাইভ নিট প্রফিট</p>
+                    <p class="text-2xl md:text-3xl font-black text-emerald-400 mt-2 tracking-wide">₹১,৪৫০.৫০</p>
+                    <p class="text-[10px] text-slate-500 mt-2 flex items-center gap-1"><i class="fa-solid fa-shield-halved text-emerald-500"></i> ইমোশনলেস জিরো-লস সেফটি মোড সচল</p>
                 </div>
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                    <p class="text-xs text-slate-400 font-medium">🎁 রেফারেল নেটওয়ার্ক আর্নিং</p>
-                    <p class="text-3xl font-black text-amber-400 mt-2">₹৩২০.০০</p>
-                    <p class="text-[10px] text-emerald-400 mt-1">💸 সরাসরি আপনার ওয়ালেটে পাঠানো হয়েছে (৩%)</p>
+                <div class="bg-gradient-to-br from-slate-900/60 to-slate-950/80 border border-slate-800/80 p-5 md:p-6 rounded-2xl shadow-xl border-l-4 border-l-amber-500">
+                    <p class="text-[11px] text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-network-wired text-amber-400"></i> প্লাস নেটওয়ার্ক রেফারেল রেভিনিউ</p>
+                    <p class="text-2xl md:text-3xl font-black text-amber-400 mt-2 tracking-wide">₹৩২০.০০</p>
+                    <p class="text-[10px] text-emerald-400 mt-2 font-medium flex items-center gap-1"><i class="fa-solid fa-bolt-lightning text-amber-500"></i> কাস্টমার ওয়ালেটে অটো-ক্রেডিটেড (৩% ইন্স্ট্যান্ট)</p>
                 </div>
             </div>
 
-            <!-- এআই লাইভ ট্রেড অ্যাক্টিভিটি লগ -->
-            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-sm font-bold text-emerald-400 uppercase tracking-wider">🤖 Angel AI লাইভ ট্রেডিং লগ</h2>
-                    <span class="flex h-2 w-2 relative">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                </div>
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs font-mono space-y-2 text-slate-300 max-h-48 overflow-y-auto">
-                    <p class="text-slate-500">[18:20:12] 🧭 গ্লোবাল মার্কেট সেন্টিমেন্ট স্ক্যান করা হচ্ছে...</p>
-                    <p class="text-cyan-400">[18:21:05] 🔓 ZK-Security ভল্ট থেকে এপিআই চাবি নিরাপদে কানেক্টেড।</p>
-                    <p class="text-indigo-400">[18:21:40] 🔌 ইউনিভার্সাল কানেক্টর ইঞ্জিন সচল করা হয়েছে।</p>
-                    <p id="log-broker-status" class="text-purple-400">[18:22:15] 📡 রুট সেট করা হয়েছে: UPSTOX এপিআই সার্ভারের সাথে হ্যান্ডশেক সফল।</p>
-                    <p class="text-emerald-400">[18:22:50] 🚀 Angel AI সিগন্যাল: জিরো-লস হেজিং মোড চালু আছে।</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ================= Angel AI ফ্লটিং চ্যাট উইজেট (নতুন যুক্ত করা হয়েছে) ================= -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <!-- চ্যাট বাবল বাটন -->
-        <div onclick="toggleChatWindow()" class="w-14 height w-14 h-14 bg-amber-400 rounded-full flex justify-center items-center cursor-pointer shadow-xl shadow-amber-400/20 hover:scale-110 active:scale-95 transition-all">
-            <i class="fa-solid fa-robot text-slate-950 text-xl"></i>
-        </div>
-        <!-- চ্যাট উইন্ডো -->
-        <div id="angelChatWindow" class="absolute bottom-16 right-0 w-80 md:w-96 h-[450px] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl hidden flex-col overflow-hidden">
-            <!-- চ্যাট হেডার -->
-            <div class="bg-slate-800 p-4 flex items-center gap-3 border-b border-slate-700">
-                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                <div>
-                    <h3 class="text-sm font-bold text-amber-400">Angel AI Engine</h3>
-                    <p class="text-[10px] text-slate-400">Your Secure Coding & Trading Partner</p>
-                </div>
-            </div>
-            <!-- মেসেজ বক্স -->
-            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs flex flex-col">
-                <div class="bg-slate-800 text-slate-200 p-3 rounded-xl rounded-bl-none max-w-[85%] self-start leading-relaxed">
+            <!-- Quantum Logging Activity Board -->
