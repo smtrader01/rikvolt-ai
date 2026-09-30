@@ -1,3 +1,4 @@
+--only-binary=:all:
 wheel
 pandas==2.2.2
 requests
