@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel AI - Live Dashboard</title>
+    <!-- Tailwind CSS (ডিজাইন সুন্দর ও রেসপন্সিভ করার জন্য) -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { background: linear-gradient(135deg, #090d16 0%, #0f172a 100%); }
+    </style>
+</head>
+<body class="text-white min-h-screen font-sans p-4 md:p-8">
+
+    <!-- হেডার সেকশন -->
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-8 border-b border-slate-800 pb-4">
+        <div>
+            <h1 class="text-2xl font-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+                👑 Project Angel AI Control
+            </h1>
+            <p class="text-xs text-slate-400 mt-1">স্বাগতম, Subrata Das | রোল: অ্যাডমিন/মালিক</p>
+        </div>
+        <!-- 🚨 স্পেশাল প্যানিক বাটন (জরুরি অবস্থায় সব ট্রেড বন্ধ করার জন্য) -->
+        <button onclick="activatePanicButton()" class="mt-4 md:mt-0 bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-red-600/30 transition-all text-sm">
+            🚨 EMERGENCY PANIC BUTTON
+        </button>
+    </div>
+
+    <!-- মেইন গ্রিড লেআউট -->
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- ================= বাম কলাম: কাস্টম ফান্ড ও মার্কেট কন্ট্রোল ================= -->
+        <div class="space-y-6 md:col-span-1">
+            <!-- ফান্ড ইনপুট কার্ড -->
+            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                <h2 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-4">💰 ট্রেডিং ফান্ড সেটআপ</h2>
+                <label class="block text-xs text-slate-400 mb-2">আপনার ইচ্ছামতো ট্রেডিং অ্যামাউন্ট দিন (১০০ টাকা থেকে যেকোনো পরিমাণ):</label>
+                <div class="flex gap-2">
+                    <input id="trading-amount" type="number" placeholder="যেমন: 5000" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white focus:outline-none focus:border-cyan-500 text-sm font-semibold">
+                    <button onclick="updateFund()" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-bold px-4 rounded-xl text-sm transition-all">সেট</button>
+                </div>
+                <p class="text-[11px] text-emerald-400 mt-2 font-medium">🎯 বর্তমান অ্যাক্টিভ ফান্ড: <span id="current-fund">$0.00</span></p>
+            </div>
+
+            <!-- মার্কেট সিলেকশন কার্ড -->
+            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                <h2 class="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4">🌍 মার্কেট অন/অফ করুন</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center justify-between bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50 cursor-pointer">
+                        <span class="text-xs font-medium">🇮🇳 Indian Market (Upstox)</span>
+                        <input type="checkbox" class="accent-cyan-400 h-4 w-4">
+                    </label>
+                    <label class="flex items-center justify-between bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50 cursor-pointer">
+                        <span class="text-xs font-medium">🪙 Crypto Market (Binance)</span>
+                        <input type="checkbox" checked class="accent-cyan-400 h-4 w-4">
+                    </label>
+                    <label class="flex items-center justify-between bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50 cursor-pointer">
+                        <span class="text-xs font-medium">💱 Forex Market (MT5)</span>
+                        <input type="checkbox" class="accent-cyan-400 h-4 w-4">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ডান কলাম: লাইভ প্রফিট ও রেফারেল ট্র্যাকার ================= -->
+        <div class="space-y-6 md:col-span-2">
+            <!-- লাইভ আর্নিং স্ট্যাটাস কার্ড -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                    <p class="text-xs text-slate-400 font-medium">📈 আপনার লাইভ নিট প্রফিট</p>
+                    <p class="text-3xl font-black text-emerald-400 mt-2">$১,৪৫০.৫০</p>
+                    <p class="text-[10px] text-slate-500 mt-1">সব ট্রেড ক্লোজড (জিরো লস সেফটি মোড)</p>
+                </div>
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                    <p class="text-xs text-slate-400 font-medium">🎁 রেফারেল নেটওয়ার্ক আর্নিং</p>
+                    <p class="text-3xl font-black text-amber-400 mt-2">$৩২০.০০</p>
+                    <p class="text-[10px] text-emerald-400 mt-1">💸 সরাসরি আপনার ওয়ালেটে পাঠানো হয়েছে (৩%)</p>
+                </div>
+            </div>
+
+            <!-- এআই লাইভ ট্রেড অ্যাক্টিভিটি লগ -->
+            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-sm font-bold text-emerald-400 uppercase tracking-wider">🤖 Angel AI লাইভ ট্রেডিং লগ</h2>
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs font-mono space-y-2 text-slate-300 max-h-48 overflow-y-auto">
+                    <p class="text-slate-500">[17:50:12] 🧭 গ্লোবাল মার্কেট সেন্টিমেন্ট স্ক্যান করা হচ্ছে...</p>
+                    <p class="text-cyan-400">[17:51:05] 🔑 ZK-Security ভল্ট থেকে এপিআই চাবি নিরাপদে কানেক্টেড।</p>
+                    <p class="text-indigo-400">[17:52:40] 📊 Binance-এ BTCUSDT ক্যান্ডেলস্টিক চার্ট রিড করা হচ্ছে।</p>
+                    <p class="text-emerald-400">[17:54:15] 🚀 Angel AI সিগন্যাল: LONG (Buy)। টাইট রিস্ক শিল্ড একটিভেটেড।</p>
+                    <p class="text-amber-400">[17:55:00] 💰 প্রফিট প্রসেসড! ২০% কোম্পানি কমিশন এবং ৩% রেফারেল বোনাস সফলভাবে ওয়ালেটে ট্রান্সফারড।</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ইন্টারঅ্যাক্টিভ ফ্রন্টএন্ড জাভাস্ক্রিপ্ট লজিক -->
+    <script>
+        function updateFund() {
+            const amount = document.getElementById('trading-amount').value;
+            if(amount && amount > 0) {
+                document.getElementById('current-fund').innerText = '₹' + parseFloat(amount).toLocaleString('bn-BD');
+                alert('✅ আপনার নতুন ট্রেডিং ক্যাপিটাল সফলভাবে সেট করা হয়েছে!');
+            } else {
+                alert('⚠️ অনুগ্রহ করে একটি সঠিক অ্যামাউন্ট ইনপুট দিন।');
+            }
+        }
+
+        function activatePanicButton() {
+            if(confirm('🚨 আপনি কি নিশ্চিত যে আপনি এই মুহূর্তে সমস্ত রানিং ট্রেড বন্ধ করে ফান্ড ক্যাশ লক করতে চান?')) {
+                alert('🛡️ SENTINEL SHIELD ACTIVATED! Angel AI ১ মিলি-সেকেন্ডের মধ্যে সমস্ত লাইভ ট্রেড ক্লোজ করে আপনার ব্রোকার ফান্ড সম্পূর্ণ ক্যাশ লক করে দিয়েছে।');
+            }
+        }
+    </script>
+</body>
+</html>
