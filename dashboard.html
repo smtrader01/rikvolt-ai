@@ -4,249 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel AI - Elite Trading Panel</title>
-    <!-- FontAwesome Premium Icons -->
+    <!-- 🟢 স্টেবল এবং প্রফেশনাল Tailwind CSS লাইব্রেরি (মোবাইল ডিজাইন ঠিক করার জন্য) -->
+    <script src="https://tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
-    
-    <style>
-        /* Modern Native Dark UI Grid - Guaranteed Mobile Responsive */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body {
-            overflow-x: hidden;
-            overflow-y: auto !important; /* স্ক্রোলিং ১০০% নিশ্চিত করার জন্য */
-            min-height: 100vh;
-        }
-        body { 
-            background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
-            color: #f8fafc;
-            font-family: system-ui, -apple-system, sans-serif;
-            padding: 15px;
-        }
-        .container { max-width: 1100px; margin: 0 auto; width: 100%; padding-bottom: 120px; }
-        
-        /* Elite Top Bar Header */
-        .top-bar {
-            background: #151c2c;
-            border: 1px solid #222e45;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        @media(min-width: 768px) {
-            .top-bar { flex-direction: row; justify-content: space-between; align-items: center; }
-        }
-        .brand-title {
-            font-size: 20px;
-            font-weight: 900;
-            color: #38bdf8;
-            letter-spacing: 0.5px;
-        }
-        .admin-sub { font-size: 11px; color: #94a3b8; margin-top: 4px; }
-        
-        /* Elite Controls Area */
-        .controls-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; width: 100%; }
-        @media(min-width: 768px) { .controls-group { width: auto; } }
-        
-        .mode-badge {
-            background: #0f1524;
-            border: 1px solid #222e45;
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #f59e0b;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* Custom Premium Toggle Switch */
-        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #ff9100; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background: #00e676; }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        .panic-btn {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.2s;
-            text-transform: uppercase;
-        }
-        .panic-btn:active { transform: scale(0.95); }
-
-        /* Multi-Column Main Dashboard Layout */
-        .main-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media(min-width: 992px) {
-            .main-grid { grid-template-columns: 1fr 2fr; }
-        }
-
-        /* Responsive Cards Template */
-        .card {
-            background: #151c2c;
-            border: 1px solid #222e45;
-            padding: 20px;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .card-title-cyan { font-size: 13px; font-weight: 800; color: #38bdf8; text-transform: uppercase; tracking-wider; }
-        .card-title-indigo { font-size: 13px; font-weight: 800; color: #818cf8; text-transform: uppercase; tracking-wider; }
-        .card-title-emerald { font-size: 13px; font-weight: 800; color: #34d399; text-transform: uppercase; tracking-wider; }
-        
-        .desc-text { font-size: 11px; color: #94a3b8; line-height: 1.5; }
-        
-        .input-row { display: flex; gap: 8px; width: 100%; }
-        input[type="number"], input[type="password"], select {
-            flex: 1;
-            background: #0f1524;
-            border: 1px solid #222e45;
-            padding: 12px;
-            border-radius: 12px;
-            color: white;
-            font-size: 13px;
-            outline: none;
-            font-weight: 600;
-            width: 100%;
-        }
-        
-        .btn-action {
-            background: #0ea5e9;
-            color: #0f172a;
-            font-weight: 700;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        .btn-gradient {
-            background: linear-gradient(90deg, #6366f1, #a855f7);
-            color: white;
-            font-weight: 700;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        /* Stats Blocks Architecture */
-        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 10px; }
-        @media(min-width: 576px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
-        
-        .stat-box {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #222e45;
-            padding: 20px;
-            border-radius: 16px;
-        }
-        .stat-label { font-size: 11px; color: #94a3b8; font-weight: 600; }
-        .stat-val-green { font-size: 26px; font-weight: 900; color: #4ade80; margin-top: 8px; }
-        .stat-val-amber { font-size: 26px; font-weight: 900; color: #fbbf24; margin-top: 8px; }
-        
-        /* Activity Stream Window */
-        .terminal-box {
-            background: #020617;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 14px;
-            font-family: monospace;
-            font-size: 11px;
-            line-height: 1.6;
-            height: 180px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        /* Floating Angel AI Interface Module - LOCKED TO SCREEN */
-        .angel-widget { 
-            position: fixed; 
-            bottom: 20px; 
-            right: 20px; 
-            z-index: 999999 !important; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-end; 
-            gap: 10px; 
-        }
-        .chat-bubble {
-            width: 58px;
-            height: 58px;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.6);
-        }
-        .chat-bubble i { color: #0f172a; font-size: 22px; }
-        
-        .chat-win {
-            width: 310px;
-            height: 420px;
-            background: #151c2c;
-            border: 1px solid #222e45;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .chat-head { background: #1e293b; padding: 12px 15px; border-bottom: 1px solid #222e45; display: flex; justify-content: space-between; align-items: center; }
-        .chat-head-info { display: flex; align-items: center; gap: 8px; }
-        .online-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
-        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 12px; }
-        
-        .msg-node { max-width: 85%; padding: 10px 14px; border-radius: 14px; line-height: 1.5; }
-        .msg-node.bot { background: #1e293b; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .msg-node.user { background: #fbbf24; color: #0f172a; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 600; }
-        
-        .chat-foot { padding: 10px; background: #020617; border-top: 1px solid #222e45; display: flex; gap: 8px; }
-    </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8 overflow-y-auto">
 
-    <div class="container">
+    <div class="max-w-4xl mx-auto space-y-6 pb-24">
         <!-- Elite Top Bar Header -->
-        <div class="top-bar">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl">
             <div>
-                <div class="brand-title">👑 Project Angel AI Control</div>
-                <div class="admin-sub">স্বাগতম, Rik | রোল: প্রধান অ্যাডমিন ও মালিক</div>
+                <h1 class="text-xl font-black text-cyan-400 flex items-center gap-2">
+                    👑 Project Angel AI Control
+                </h1>
+                <p class="text-xs text-slate-400 mt-1 font-medium">
+                    স্বাগতম, <span class="text-emerald-400 font-bold">Rik</span> | রোল: প্রধান অ্যাডমিন ও মালিক
+                </p>
             </div>
             
-            <div class="controls-group">
-                <div class="mode-badge">
-                    <span id="mode-text"><i class="fa-solid fa-flask"></i> ডেমো মোড (Sandbox)</span>
-                    <label class="switch">
-                        <input type="checkbox" id="modeToggle" onchange="toggleTradingMode()">
-                        <span class="slider"></span>
-                    </label>
+            <div class="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
+                <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-xs font-bold text-amber-500 flex items-center gap-2 shadow-inner">
+                    <i class="fa-solid fa-flask"></i> ডেমো মোড (Sandbox)
                 </div>
-                <button class="panic-btn" onclick="activatePanicButton()"><i class="fa-solid fa-triangle-exclamation"></i> Emergency</button>
+                <button onclick="activatePanicButton()" class="bg-red-600 hover:bg-red-700 text-white font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow-md shadow-red-600/20 active:scale-95 transition-all cursor-pointer">
+                    🚨 Emergency Panic
+                </button>
             </div>
         </div>
 
-        <!-- Main Dashboard Layout -->
-        <div class="main-grid">
-            
-            <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- Main Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Left Controls Column -->
+            <div class="md:col-span-1 space-y-6">
                 <!-- Capital Setup Card -->
-                <div class="card">
-                    <div class="card-title-cyan"><i class="fa-solid fa-wallet"></i> ট্রেডিং ফান্ড সেটআপ</div>
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                    <h2 class="text-xs font-black text-cyan-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-wallet"></i> ট্রেডিং ফান্ড সেটআপ
+                    </h2>
+                    <p class="text-[11px] text-slate-400 mb-3">আপনার ইচ্ছামতো ট্রেডিং অ্যামাউন্ট দিন:</p>
+                    <div class="flex gap-2">
+                        <input id="trading-amount" type="number" placeholder="যেমন: 5000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-cyan-500 text-xs font-semibold shadow-inner">
+                        <button onclick="updateFund()" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-black px-4 rounded-xl text-xs transition-all cursor-pointer shadow-md">সেট</button>
+                    </div>
+                    <p class="text-[11px] text-emerald-400 mt-3 font-medium">🎯 অ্যাক্টিভ ফান্ড: <span id="current-fund" class="font-bold">₹0.00</span></p>
+                </div>
+
+                <!-- Broker Setup Card -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                    <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-plug"></i> ব্রোকার লাইভ গেটওয়ে
+                    </h2>
+                    <select id="broker-select" onchange="handleBrokerChange()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs font-bold cursor-pointer outline-none mb-3">
+                        <option value="ZERODHA">Zerodha (Kite)</option>
+                        <option value="ANGEL_ONE">Angel One</option>
+                        <option value="UPSTOX" selected>Upstox API v2</option>
+                        <option value="BINANCE">Binance (Crypto)</option>
+                    </select>
+                    <input type="password" placeholder="API Key / Token" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-indigo-500 text-xs mb-3 shadow-inner">
+                    <button onclick="connectBrokerAPI()" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-95 text-white font-extrabold p-2.5 rounded-xl text-xs transition-all shadow-md uppercase tracking-wider cursor-pointer">
+                        লিঙ্ক করুন 🔗
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Performance & Log Column -->
+            <div class="md:col-span-2 space-y-6">
+                <!-- Stats Blocks -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-l-emerald-500">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-chart-line text-emerald-400"></i> লাইভ নিট প্রফিট</p>
+                        <p class="text-2xl font-black text-emerald-400 mt-1">₹১,৪৫০.৫০</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-l-amber-500">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-network-wired text-amber-400"></i> প্লাস নেটওয়ার্ক আর্নিং</p>
+                        <p class="text-2xl font-black text-amber-400 mt-1">₹৩২০.০০</p>
+                    </div>
+                </div>
+
+                <!-- Live Log Activity Board -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-lg">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-xs font-black text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-rectangle-terminal"></i> Angel AI একটিভিটি লগ
+                        </h2>
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 text-[11px] font-mono space-y-2 text-slate-300 max-h-40 overflow-y-auto leading-relaxed shadow-inner">
+                        <p class="text-slate-500">[18:20:12] 🧭 গ্লোবাল মার্কেট স্ক্যান করা হচ্ছে...</p>
+                        <p class="text-cyan-400">[18:21:05] 🔓 ZK-Security ডাটাবেস ভল্ট সচল।</p>
+                        <p id="log-broker-status" class="text-purple-400">[18:22:15] 📡 UPSTOX এপিআই নোড হ্যান্ডশেক সফল।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= Angel AI ফ্লটিং চ্যাট উইজেট (স্ক্রিনে ফিক্সড করা) ================= -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+        <!-- চ্যাট উইন্ডো -->
+        <div id="angelChatWin" class="w-72 sm:w-88 h-[400px] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl hidden flex-col overflow-hidden mb-2">
+            <div class="bg-slate-800 p-3.5 flex items-center justify-between border-b border-slate-700">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span class="text-xs font-black text-amber-400 tracking-wider uppercase">Angel AI System</span>
+                </div>
+                <button onclick="toggleChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+            <div id="chatMsgs" class="flex-1 p-4 overflow-y-auto space-y-3 text-[11px] flex flex-col bg-slate-950/20">
+                <div class="bg-slate-900 border border-slate-800/60 text-slate-200 p-3 rounded-xl rounded-bl-none max-w-[85%] self-start leading-relaxed shadow-sm">
+                    হ্যালো <strong>Rik</strong>! আমি আপনার পার্সোনাল এআই ইঞ্জিনিয়ার। আজ আপনার ট্রেডিং সিস্টেমে নতুন কী ইউনিক স্ট্র্যাটেজি যোগ করতে চান বলুন? আপনি যা টাইপ করবেন তা সরাসরি আপনার <strong>PostgreSQL ডাটাবেসে</strong> সুরক্ষিতভাবে সেভ হবে!
+                </div>
+            </div>
+            <div class="p-2 bg-slate-950 border-t border-slate-900 flex gap-2">
+                <input type="text" id="chatInput" placeholder="এখানে বলুন (যেমন: RSI স্ট্র্যাটেজি)..." class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
+                <button onclick="sendMsg()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black w-8 h-8 rounded-xl flex justify-center items-center transition-all cursor-pointer shadow-md">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </div>
+        <!-- চ্যাট বাবল বাটন -->
+        <div onclick="toggleChat()" class="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex justify-center items-center cursor-pointer shadow-xl shadow-amber-500/30 hover:scale-105 active:scale-95 transition-all border border-amber-300/20">
+            <i class="fa-solid fa-robot text-slate-950 text-xl animate-pulse"></i>
+        </div>
+    </div>
+
+    <script>
+        function updateFund() {
+            const amount = document.getElementById('trading-amount').value;
+            if(amount > 0) {
+                document.getElementById('current-fund').innerText = '₹' + parseFloat(amount).toLocaleString('bn-BD');
+                alert('✅ আপনার নতুন ট্রেডিং ক্যাপিটাল সফলভাবে সেট করা হয়েছে!');
+            }
+        }
+        function handleBrokerChange() {
