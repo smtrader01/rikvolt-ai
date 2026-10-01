@@ -12,8 +12,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
             overflow-x: hidden;
-            overflow-y: auto; /* স্ক্রোলিং ফিক্স করার জন্য */
-            height: 100%;
+            overflow-y: auto !important; /* স্ক্রোলিং ১০০% নিশ্চিত করার জন্য */
+            min-height: 100vh;
         }
         body { 
             background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
@@ -21,7 +21,7 @@
             font-family: system-ui, -apple-system, sans-serif;
             padding: 15px;
         }
-        .container { max-width: 1100px; margin: 0 auto; width: 100%; padding-bottom: 100px; }
+        .container { max-width: 1100px; margin: 0 auto; width: 100%; padding-bottom: 120px; }
         
         /* Elite Top Bar Header */
         .top-bar {
@@ -99,6 +99,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-bottom: 10px;
         }
         .card-title-cyan { font-size: 13px; font-weight: 800; color: #38bdf8; text-transform: uppercase; tracking-wider; }
         .card-title-indigo { font-size: 13px; font-weight: 800; color: #818cf8; text-transform: uppercase; tracking-wider; }
@@ -119,7 +120,6 @@
             font-weight: 600;
             width: 100%;
         }
-        input:focus, select:focus { border-color: #38bdf8; }
         
         .btn-action {
             background: #0ea5e9;
@@ -144,7 +144,7 @@
         }
 
         /* Stats Blocks Architecture */
-        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 10px; }
         @media(min-width: 576px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
         
         .stat-box {
@@ -173,44 +173,43 @@
             gap: 8px;
         }
         
-        /* Floating Angel AI Interface Module - Fixed to viewport bottom right ALWAYS */
+        /* Floating Angel AI Interface Module - LOCKED TO SCREEN */
         .angel-widget { 
             position: fixed; 
-            bottom: 25px; 
-            right: 25px; 
-            z-index: 99999; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 999999 !important; 
             display: flex; 
             flex-direction: column; 
             align-items: flex-end; 
             gap: 10px; 
         }
         .chat-bubble {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 25px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.6);
         }
-        .chat-bubble i { color: #0f172a; font-size: 24px; }
+        .chat-bubble i { color: #0f172a; font-size: 22px; }
         
         .chat-win {
-            width: 320px;
-            height: 430px;
+            width: 310px;
+            height: 420px;
             background: #151c2c;
             border: 1px solid #222e45;
             border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             display: none;
             flex-direction: column;
             overflow: hidden;
         }
-        @media(min-width: 420px) { .chat-win { width: 370px; } }
         
-        .chat-head { background: #1e293b; padding: 14px 15px; border-bottom: 1px solid #222e45; display: flex; justify-content: space-between; align-items: center; }
+        .chat-head { background: #1e293b; padding: 12px 15px; border-bottom: 1px solid #222e45; display: flex; justify-content: space-between; align-items: center; }
         .chat-head-info { display: flex; align-items: center; gap: 8px; }
         .online-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
         .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 12px; }
@@ -219,7 +218,7 @@
         .msg-node.bot { background: #1e293b; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; }
         .msg-node.user { background: #fbbf24; color: #0f172a; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 600; }
         
-        .chat-foot { padding: 12px; background: #020617; border-top: 1px solid #222e45; display: flex; gap: 8px; }
+        .chat-foot { padding: 10px; background: #020617; border-top: 1px solid #222e45; display: flex; gap: 8px; }
     </style>
 </head>
 <body>
@@ -240,14 +239,14 @@
                         <span class="slider"></span>
                     </label>
                 </div>
-                <button class="panic-btn" onclick="activatePanicButton()"><i class="fa-solid fa-triangle-exclamation"></i> Emergency Panic</button>
+                <button class="panic-btn" onclick="activatePanicButton()"><i class="fa-solid fa-triangle-exclamation"></i> Emergency</button>
             </div>
         </div>
 
-        <!-- Multi-Column Main Dashboard Layout -->
+        <!-- Main Dashboard Layout -->
         <div class="main-grid">
             
-            <!-- LEFT COLUMN -->
             <div style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Capital Setup Card -->
                 <div class="card">
                     <div class="card-title-cyan"><i class="fa-solid fa-wallet"></i> ট্রেডিং ফান্ড সেটআপ</div>
