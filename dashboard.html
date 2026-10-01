@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel AI - Elite Trading Panel</title>
-    <!-- FontAwesome Premium Icons -->
+    <!-- FontAwesome Premium Icons Link Fix -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
@@ -41,7 +41,9 @@
         .admin-sub { font-size: 11px; color: #94a3b8; margin-top: 4px; }
         
         /* Elite Controls Area */
-        .controls-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .controls-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; width: 100%; }
+        @media(min-width: 768px) { .controls-group { width: auto; } }
+        
         .mode-badge {
             background: #0f1524;
             border: 1px solid #222e45;
@@ -77,8 +79,8 @@
         }
         .panic-btn:active { transform: scale(0.95); }
 
-        /* Multi-Column Main Dashboard Layout Layout */
-        .main-grid { display: grid; grid-cols: 1; gap: 20px; margin-bottom: 80px; }
+        /* Multi-Column Main Dashboard Layout */
+        .main-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 80px; }
         @media(min-width: 992px) {
             .main-grid { grid-template-columns: 1fr 2fr; }
         }
@@ -203,37 +205,39 @@
         .msg-node.bot { background: #1e293b; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 2px; }
         .msg-node.user { background: #fbbf24; color: #0f172a; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 600; }
         
-        .chat-foot { padding: 10px; bg: #020617; border-top: 1px solid #222e45; display: flex; gap: 8px; }
-        .chat-foot input { flex: 1; background: #0f1524; border: 1px solid #222e45; padding: 10px 14px; border-radius: 10px; color: white; font-size: 12px; outline: none; }
-        .chat-foot button { background: #fbbf24; border: none; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .chat-foot button i { color: #0f172a; font-size: 14px; }
+        .chat-foot { padding: 10px; background: #020617; border-top: 1px solid #222e45; display: flex; gap: 8px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Elite Navigation Header -->
+        <!-- Elite Top Bar Header -->
         <div class="top-bar">
             <div>
-                <h1 class="brand-title">👑 Project Angel AI Multi-Agent</h1>
-                <p class="admin-sub"><i class="fa-solid fa-circle" style="color: #22c55e; font-size: 7px;"></i> স্বাগতম, Subrata Das | রোল: প্রধান মালিক</p>
+                <!-- এখানে আপনার নাম "Rik" সফলভাবে সেট করা হয়েছে -->
+                <div class="brand-title">👑 Project Angel AI Control</div>
+                <div class="admin-sub">স্বাগতম, Rik | রোল: প্রধান অ্যাডমিন ও মালিক</div>
             </div>
+            
             <div class="controls-group">
                 <div class="mode-badge">
-                    <span id="mode-text"><i class="fa-solid fa-flask-vial"></i> ডেমো মোড (Sandbox)</span>
+                    <span id="mode-text"><i class="fa-solid fa-flask"></i> ডেমো মোড (Sandbox)</span>
                     <label class="switch">
                         <input type="checkbox" id="modeToggle" onchange="toggleTradingMode()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <button onclick="activatePanicButton()" class="panic-btn">🚨 EMERGENCY PANIC</button>
+                <button class="panic-btn" onclick="activatePanicButton()"><i class="fa-solid fa-triangle-exclamation"></i> Emergency Panic</button>
             </div>
         </div>
 
-        <!-- Main Dashboard Split Layout -->
+        <!-- Multi-Column Main Dashboard Layout -->
         <div class="main-grid">
             
-            <!-- LEFT COLUMN CONTROLS -->
-            <div class="card-wrap" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Fund Allocation Box -->
+            <!-- LEFT COLUMN: Configurations -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Capital Setup Card -->
                 <div class="card">
+                    <div class="card-title-cyan"><i class="fa-solid fa-wallet"></i> ট্রেডিং ফান্ড সেটআপ</div>
+                    <div class="desc-text">আপনার ইচ্ছামতো ট্রেডিং অ্যামাউন্ট দিন (১০০ টাকা থেকে যেকোনো পরিমাণ):</div>
+                    <div class="input-row">
